@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>DLF 5 Food Help Chatbot — Durga Puja 2026</title>
+<style>
+:root{--maroon:#921326;--red:#bd1e32;--gold:#f1c35b;--cream:#fff9ed;--ink:#2b2b2b;--muted:#6e6258;--border:#ead8b2}
+*{box-sizing:border-box}
+body{margin:0;background:#f8efd9;color:var(--ink);font-family:Arial,Helvetica,sans-serif}
+.app{max-width:760px;min-height:100vh;margin:0 auto;background:var(--cream);display:flex;flex-direction:column;box-shadow:0 0 24px #5c1a1a18}
+header{background:linear-gradient(135deg,#7d0b1b,var(--maroon));color:#fff;text-align:center;padding:22px 16px 19px;border-bottom:5px solid var(--gold)}
+.brand{font-size:12px;font-weight:800;letter-spacing:2px;color:#ffe4a1;margin-bottom:8px}
+h1{font-family:Georgia,serif;font-size:27px;line-height:1.15;margin:0}
+header p{font-size:13px;color:#ffe9d1;margin:9px 0 0}
+main{padding:16px;flex:1}
+.welcome{background:#fff0c9;border:1px solid #e9ca79;border-radius:13px;padding:13px 14px;font-size:14px;line-height:1.5;margin-bottom:15px}
+.section-label{font-size:12px;font-weight:800;letter-spacing:.7px;text-transform:uppercase;color:#7e1524;margin:0 0 8px}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.quick button{appearance:none;-webkit-appearance:none;border:1px solid #b91e32;background:#fff;color:#8f1023;border-radius:22px;padding:11px 13px;font-size:13px;font-weight:700;line-height:1.2;cursor:pointer;touch-action:manipulation;user-select:none;-webkit-tap-highlight-color:rgba(185,30,50,.18);position:relative;z-index:1}
+.quick button:active,.quick button:focus{background:#ffe9bf;outline:2px solid #e8c15d;outline-offset:1px}
+.chat{display:flex;flex-direction:column;gap:11px}
+.msg{max-width:100%;padding:13px 14px;border-radius:13px;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.bot{align-self:stretch;background:#fff;border:1px solid #e7dcc8;border-bottom-left-radius:4px}
+.user{align-self:flex-end;max-width:90%;background:#fbe4e4;border:1px solid #efc2c7;border-bottom-right-radius:4px}
+.msg strong{color:#951326}.msg ul,.msg ol{padding-left:21px;margin:7px 0}.msg li{margin:5px 0}
+.daytitle{font-weight:800;color:#951326;margin-bottom:4px}
+hr{border:0;border-top:1px solid #eadfc7;margin:12px 0}
+footer{font-size:11px;color:var(--muted);text-align:center;padding:10px 14px 16px}
+@media(min-width:600px){main{padding:22px}.msg{font-size:15px}h1{font-size:31px}}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+  <div class="brand">DLF 5 · DURGA PUJA 2026</div>
+  <h1>Food Help Chatbot</h1>
+  <p>Food menus · Coupons &amp; tokens · Booking · Helpdesk</p>
+</header>
+<main>
+  <div class="welcome"><strong>Namaskar! 🙏</strong><br>Welcome to the DLF 5 Durga Puja 2026 Food Help Chatbot. Tap a shortcut below to view information. The five Puja-day shortcuts are listed first, in chronological order.</div>
+  <div class="section-label">Puja days</div>
+  <div class="quick" id="day-shortcuts">
+    <button type="button" data-q="day:saptami1">Saptami 1</button>
+    <button type="button" data-q="day:saptami2">Saptami 2</button>
+    <button type="button" data-q="day:ashtami">Ashtami</button>
+    <button type="button" data-q="day:nabami">Nabami</button>
+    <button type="button" data-q="day:dashami">Dashami</button>
+  </div>
+  <div class="section-label">More help</div>
+  <div class="quick" id="help-shortcuts">
+    <button type="button" data-q="card-how">How your Puja Card works?</button>
+    <button type="button" data-q="menu">Daily food menu</button>
+    <button type="button" data-q="limits">Extra food limits</button>
+    <button type="button" data-q="advance">Advance payment rules</button>
+    <button type="button" data-q="booking">Booking &amp; SPOCs</button>
+    <button type="button" data-q="checklist">Member action checklist</button>
+    <button type="button" data-q="helpdesk">Helpdesk timings</button>
+    <button type="button" data-q="helpdesk-benefit">Why use Helpdesk?</button>
+    <button type="button" data-q="originals">Original coupons &amp; tokens</button>
+    <button type="button" data-q="age-rules">Age limits &amp; other restrictions</button>
+    <button type="button" data-q="packing">Packing food &amp; carrying bags</button>
+  </div>
+  <div class="chat" id="chat" aria-live="polite">
+    <div class="msg bot">Select any shortcut to see the relevant details here.</div>
+  </div>
+</main>
+<footer>DLF 5 Durga Puja 2026 · Member food information</footer>
+</div>
+<script>
+(function(){
+"use strict";
+const days = {
+ saptami1:{name:"Saptami 1",date:"Saturday, 17 October 2026",menu:"Packed lunch — Veg",free:"Up to 4 packed meals per card",extra:"Any number of extra packed meals at ₹600 each",booking:"Advance booking and payment are mandatory by 14 October 2026.",spoc:"Sukanya Sen",phone:"98100 96395",note:"Contact Sukanya Sen on or before 14 October 2026. After 14 October 2026, extra meals for Saptami 1 cannot be purchased."},
+ saptami2:{name:"Saptami 2",date:"Sunday, 18 October 2026",menu:"Buffet lunch — Veg",free:"Up to 4 buffet meals per card",extra:"Maximum 2 Saptami 2 tokens; Ashtami and Nabami future-day tokens may also be redeemed (up to 2 each), technically up to 6 meals total.",booking:"No advance booking required for complimentary meals.",note:"Do not pay for extra meals in advance unless physically present at the Helpdesk, because redeemable tokens from your Puja card must be submitted."},
+ ashtami:{name:"Ashtami",date:"Monday, 19 October 2026",menu:"Buffet lunch — Veg",free:"Up to 4 buffet meals per card",extra:"Maximum 2 Ashtami tokens; future-day Nabami tokens may also be redeemed (up to 2), technically up to 4 meals total.",booking:"No advance booking required for complimentary meals.",note:"Do not pay for extra meals in advance unless physically present at the Helpdesk, because redeemable tokens from your Puja card must be submitted."},
+ nabami:{name:"Nabami",date:"Tuesday, 20 October 2026",menu:"Buffet lunch — Veg",free:"Up to 4 buffet meals per card",extra:"Maximum 2 extra meals at ₹600 each.",booking:"No advance booking required for complimentary meals.",note:"Past-day tokens are invalid. Do not pay for extra meals in advance unless physically present at the Helpdesk, because redeemable tokens from your Puja card must be submitted."},
+ dashami:{name:"Dashami",date:"Wednesday, 21 October 2026",menu:"Packed lunch based on pre-booking — Mutton, Fish or Veg",free:"Up to 4 packed meals per card",extra:"No provision for extra paid meals.",booking:"Confirm packed meal count and menu choice by 15 October 2026.",spoc:"Soma Sarkar",phone:"99305 55936",note:"Packed lunch on this day will be served only after immersion, generally not before 1:45–2:00 PM. Please follow the WhatsApp group for exact timing."}
+};
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function dayCard(d){
+ let contact=d.spoc?`<li><strong>Booking contact:</strong> ${esc(d.spoc)}${d.phone?` — ${esc(d.phone)}`:""}</li>`:"";
+ return `<div class="daytitle">${esc(d.name)} — ${esc(d.date)}</div><ul><li><strong>Food menu:</strong> ${esc(d.menu)}.</li><li><strong>Complimentary meals:</strong> ${esc(d.free)}.</li><li><strong>Extra paid food:</strong> ${esc(d.extra)}</li><li><strong>Booking:</strong> ${esc(d.booking)}</li>${contact}<li><strong>Important:</strong> ${esc(d.note)}</li></ul>`;
+}
+const answers = {
+ "card-how":`<div class="daytitle">How your Puja Card works?</div>
+ <p><strong>1. Complimentary food coupons</strong></p>
+ <p>Your Puja Card is marked with <strong>4 complimentary coupons for each of the five Puja days</strong> — Saptami 1, Saptami 2, Ashtami, Nabami and Dashami — and also for Saraswati Puja in February 2027. Each coupon is valid only for its respective day.</p>
+ <p><strong>Saptami 2, Ashtami and Nabami:</strong> No need to inform anyone or pre-book your complimentary plates. Bring your original physical coupons and go to the Food Hall.</p>
+ <p><strong>Saptami 1:</strong> Inform the SPOC by the cut-off date how many of your 4 complimentary plates you will collect. If you do not inform the SPOC by the deadline, food packs cannot be handed over. Bringing original coupons is mandatory.</p>
+ <p><strong>Dashami:</strong> Inform the SPOC by the cut-off date how many of your 4 complimentary plates you will collect and your Mutton/Fish/Veg combination. You may mix and match these options. If you do not inform the SPOC by the deadline, food packs cannot be handed over. Bringing original coupons is mandatory.</p>
+ <hr><p><strong>2. Tokens for extra food</strong></p>
+ <p>Your Puja Card is also marked with <strong>2 tokens per day from Saptami 1 through Nabami</strong> (four days in Durga Puja 2026). One token can normally be converted into an extra food coupon by paying <strong>₹600</strong> at the Helpdesk/Food Hall.</p>
+ <p><strong>Special rule for Saptami 1:</strong> Ignore the 2 tokens printed for this day. You may purchase an unlimited number of extra paid plates over and above your 4 complimentary plates, provided you contact the SPOC and complete the required booking/payment by <strong>14 October 2026</strong>.</p>
+ <hr><p><strong>3. Coupons are day-specific; paid tokens can be allocated to current/future days</strong></p>
+ <p>Complimentary coupons can only be used on the printed day. For example, a Nabami coupon cannot be used to eat on Ashtami.</p>
+ <p>After paying for eligible extra tokens, the resulting extra food coupons can be allocated across the current day and future days, subject to the day-wise limits. For example, on Ashtami, if you pay for 2 Ashtami tokens and 2 Nabami tokens, you can ask the Helpdesk to allocate the 4 extra coupons as 1 Ashtami + 3 Nabami, 2 Ashtami + 2 Nabami, or all 4 to Ashtami, where permitted by the applicable day limits.</p>
+ <p><strong>Past coupons and tokens are invalid</strong> for food service or transactions. For example, a Saptami 2 coupon cannot be used on Ashtami, and an Ashtami token cannot be used to buy extra food for Nabami.</p>
+ <p><strong>Always carry your original physical Puja Card coupons and tokens.</strong></p>`,
+ menu:`<div class="daytitle">Food menu by Puja day</div><ul><li><strong>Saptami 1:</strong> Packed lunch — Veg.</li><li><strong>Saptami 2:</strong> Buffet lunch — Veg.</li><li><strong>Ashtami:</strong> Buffet lunch — Veg.</li><li><strong>Nabami:</strong> Buffet lunch — Veg.</li><li><strong>Dashami:</strong> Packed lunch based on pre-booking — Mutton, Fish or Veg.</li></ul>`,
+ limits:`<div class="daytitle">Extra food limits — ₹600 per meal</div><ul><li><strong>Saptami 1:</strong> Any count, with advance payment by 14 October 2026 after contacting Sukanya Sen.</li><li><strong>Saptami 2:</strong> Maximum 2 tokens for Saptami 2, plus future-day Ashtami (up to 2) and Nabami (up to 2) tokens; technically 6 total.</li><li><strong>Ashtami:</strong> Maximum 2 Ashtami tokens plus future-day Nabami tokens (up to 2); technically 4 total.</li><li><strong>Nabami:</strong> Maximum 2. Past-day tokens are invalid.</li><li><strong>Dashami:</strong> No extra paid meals.</li></ul>Only current-day or future-day tokens are valid; past-day tokens cannot be redeemed.`,
+ advance:`<div class="daytitle">Advance payment for extra food</div><ul><li><strong>Saptami 1:</strong> Advance payment is mandatory. Contact Sukanya Sen on or before <strong>14 October 2026</strong>. After 14 October, extra meals for Saptami 1 cannot be purchased.</li><li><strong>Saptami 2, Ashtami and Nabami:</strong> Do not pay in advance unless physically present at the Helpdesk, because redeemable tokens from your Puja card must be submitted.</li><li><strong>Dashami:</strong> Not applicable — no provision for extra paid meals.</li></ul>`,
+ booking:`<div class="daytitle">Booking deadlines &amp; contacts</div><ul><li><strong>Saptami 1:</strong> Contact <strong>Sukanya Sen — 98100 96395</strong> and complete advance payment by <strong>14 October 2026</strong>. After this date, extra meals cannot be purchased.</li><li><strong>Dashami:</strong> Contact <strong>Soma Sarkar — 99305 55936</strong> and confirm meal count and Mutton/Fish/Veg choices by <strong>15 October 2026</strong>.</li><li><strong>Saptami 2, Ashtami and Nabami:</strong> No advance booking is required for complimentary meals. For extra food, attend the Helpdesk in person to submit redeemable tokens.</li></ul>`,
+ checklist:`<div class="daytitle">Member action checklist</div><ol><li><strong>Saptami 1:</strong> Contact Sukanya Sen (98100 96395) and complete advance payment by 14 October 2026.</li><li><strong>Dashami:</strong> Confirm meal count and Mutton/Fish/Veg choices with Soma Sarkar (99305 55936) by 15 October 2026.</li><li><strong>Every Puja day:</strong> Carry original physical coupons and tokens.</li><li><strong>Extra food for Saptami 2, Ashtami or Nabami:</strong> Visit the Helpdesk in person; submit redeemable tokens from your Puja card.</li></ol>`,
+ helpdesk:`<div class="daytitle">Helpdesk timings</div>The Helpdesk generally operates from <strong>10:30 AM to 12:30 PM</strong>. For specific days, announcements will be made in the WhatsApp group.`,
+ "helpdesk-benefit":`<div class="daytitle">Why buy extra food at the Helpdesk?</div>Extra meal coupons (in exchange of tokens in your puja card) can be purchased at the Food Hall, but we recommend you to purchase these at Helpdesk. Food Hall queues can be long, and during rush periods payment processing and coupon issuance can take up to <strong>8 minutes per request</strong>.<br><br><strong>Helpdesk timing:</strong> Generally 10:30 AM–12:30 PM. Day-specific announcements will be made in the WhatsApp group.`,
+ "packing":`<div class="daytitle">Packing food &amp; carrying bags</div><ul><li><strong>Saptami 1 and Dashami:</strong> Food will be served in packed food boxes.</li><li><strong>Saptami 2, Ashtami and Nabami:</strong> These are buffet days. Takeaway food is permitted; a designated packing counter will be available, where volunteers will foil-wrap your plate.</li><li><strong>No containers or tiffin boxes:</strong> Bringing containers/tiffin boxes for packing inside the Food Hall is strictly prohibited.</li><li><strong>Use only the designated packing counter:</strong> Food cannot be packed at any other counter.</li><li><strong>Bring your own bags:</strong> If you plan to take away food, carry your own bags. Bags will not be provided.</li></ul>`,
+ "age-rules":`<div class="daytitle">Age limits &amp; other restrictions</div><ul><li><strong>Children up to 5 years old:</strong> No coupon is required.</li><li><strong>Children above 5 years old:</strong> Counted as full members and require a valid coupon.</li><li><strong>Saptami 1 and Dashami:</strong> Food boxes will be earmarked according to pre-booking.</li><li><strong>Food Hall entry:</strong> Entry is restricted on a per-coupon basis. Maid/nanny and supporting members will not be allowed unless they are entered against a valid coupon.</li></ul>Members are requested to cooperate with these arrangements.`,
+ originals:`<div class="daytitle">Mandatory: original coupons and tokens</div><strong>Carrying original physical coupons and tokens is absolutely mandatory every Puja day.</strong><ul><li>Food will not be served without physically presenting the original coupons and tokens.</li><li>Entry will be denied if original physical coupons and tokens are not presented.</li><li>Extra paid meals cannot be purchased unless the tokens in your Puja cards are submitted at the Helpdesk or Food Hall.</li><li>No relaxation will be given for SMS, WhatsApp messages, phone calls, scanned images or photographs.</li></ul>Please carry your original physical coupons and tokens every day.`
+};
+function addMessage(content, cls){
+ const el=document.createElement("div");
+ el.className="msg "+cls;
+ el.innerHTML=content;
+ document.getElementById("chat").appendChild(el);
+ el.scrollIntoView({behavior:"smooth",block:"nearest"});
+}
+function showAnswer(key,label){
+ addMessage(esc(label),"user");
+ let answer;
+ if(key.startsWith("day:")) answer=dayCard(days[key.slice(4)]);
+ else answer=answers[key] || "Please choose one of the shortcuts above.";
+ addMessage(answer,"bot");
+}
+document.querySelectorAll("button[data-q]").forEach(button=>{
+ button.addEventListener("click",function(){
+   showAnswer(button.getAttribute("data-q"),button.textContent.trim());
+ });
+ button.addEventListener("touchend",function(event){
+   // Native click handles the activation; prevent duplicate touch-triggered answers.
+ },{passive:true});
+});
+})();
+</script>
+</body>
+</html>
